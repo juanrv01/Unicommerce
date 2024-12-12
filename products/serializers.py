@@ -21,11 +21,10 @@ class ProductSerializer(serializers.ModelSerializer):
     category = CategorySerializer()
     images = ImageSerializer(many=True)
     is_in_cart = serializers.SerializerMethodField()
-    is_in_wishlist = serializers.SerializerMethodField()
     
     class Meta:
         model=Product
-        fields = ['id', 'name', 'description', 'price', 'quantity', 'category', 'images', 'is_in_cart', 'is_in_wishlist']
+        fields = ['id', 'name', 'description', 'price', 'quantity', 'category', 'images', 'is_in_cart']
         
 
     def get_is_in_cart(self, obj):

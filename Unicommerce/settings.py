@@ -37,7 +37,7 @@ SECRET_KEY = 'django-insecure-4(!ryx6%+j6$v4_f13+_%dc&k&-5+5(@ju73o00z4@@)n74#uy
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'localhost:5173']
 
 
 # Application definition
@@ -94,7 +94,9 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
     'http://localhost:8000',
     'https://checkout.stripe.com',
-    'https://checkout.stripe.com'
+    'https://checkout.stripe.com',
+    'http://localhost:5173'
+
 ]
 CORS_ALLOWED_ORIGIN_REGEXES = [
     'http://localhost:3000',
