@@ -137,7 +137,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'Unicommerce.wsgi.application'
+#WSGI_APPLICATION = 'Unicommerce.wsgi.application'
 
 
 # Database
