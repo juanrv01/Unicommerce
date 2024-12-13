@@ -36,12 +36,9 @@ class GetOrderSerializer(serializers.ModelSerializer):
         for order_product in order_products:
             product = order_product.product
             quantity = order_product.quantity
-            images = product.images.all()
-            image_urls = [image.image.url for image in images]
             product_data.append({
                 'id': product.id,
                 'name': product.name,
-                'images': image_urls,
                 'description': product.description,
                 'price': product.price,
                 'quantity': quantity,

@@ -14,7 +14,7 @@ class Order(models.Model):
         ('CANCELLED', 'Cancelled'),
     )
     PAYMENT_METHOD_CHOICES = (
-        ('cod', 'Cash on Delivery'),
+        ('mastercard', 'Pay by mastercard'),
         ('visa', 'Pay by Visa'),
     )
     

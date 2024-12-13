@@ -40,8 +40,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'localhost:5173']
 
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# Application definition
 
 INSTALLED_APPS = [
     'jazzmin',
@@ -56,7 +55,7 @@ INSTALLED_APPS = [
     'products',
     'cart',
     'orders',
-    'payment',
+
     'rest_framework',
     'corsheaders',
     'django_filters'
