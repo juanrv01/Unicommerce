@@ -80,10 +80,16 @@ MIDDLEWARE = [
 ]
 CSRF_TRUSTED_ORIGINS = ['https://unicommerce-eta.vercel.app', 'https://unicommerce.onrender.com']
 
+CORS_ALLOW_ALL_ORIGINS = True
+
 
 ROOT_URLCONF = 'Unicommerce.urls'
 
 CORS_ORIGIN_ALLOW_ALL = True
+
+USE_X_FORWARDED_HOST = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 
 CORS_ALLOW_HEADERS=[
     "accept",
@@ -99,17 +105,8 @@ CORS_ALLOW_HEADERS=[
 
 CORS_ALLOW_CREDENTIALS = True
 
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000',
-    'http://localhost:8000',
-    'https://checkout.stripe.com',
-    'https://checkout.stripe.com',
-    'http://localhost:5173'
-
-]
-CORS_ALLOWED_ORIGIN_REGEXES = [
-    'http://localhost:3000',
-]
+CORS_ALLOWED_ORIGINS = ['*']
+CORS_ALLOWED_ORIGIN_REGEXES = ['*']
 CORS_ALLOW_METHODS = [
 'DELETE',
 'GET',
@@ -120,7 +117,7 @@ CORS_ALLOW_METHODS = [
 ]
 
 
-SITE_URL = 'http://localhost:3000'
+SITE_URL = 'https://unicommerce.onrender.com'
 ROOT_URLCONF = 'Unicommerce.urls'
 
 TEMPLATES = [
@@ -216,7 +213,7 @@ REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
 
-CORS_ALLOW_ALL_ORIGINS = True
+
 
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(days=15),
@@ -230,9 +227,6 @@ SIMPLE_JWT = {
 
 STRIPE_SECRET_WEBHOOK='whsec_03ce6b586620eec93594579b709130478dcfcaad93cfd2cf2f75f64f10d6c397'
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
-]
 
 JAZZMIN_SETTINGS = {
     "site_title": "E-Commerce Dashboard",
