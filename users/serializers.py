@@ -63,19 +63,18 @@ class FullUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CustomUser
-        fields = ['id', 'email', 'username', 'first_name', 'last_name', 'phone', 'image', 'addresses']
+        fields = ['id', 'email', 'username', 'first_name', 'last_name', 'phone', 'addresses']
 
 class BasicUserSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(required=False)
     username = serializers.CharField(required=False)
     phone = serializers.CharField(required=False)
-    image = CloudinaryField()
     password = serializers.CharField(required=False, write_only=True)
     confirm_password = serializers.CharField(required=False, write_only=True)
 
     class Meta:
         model = CustomUser
-        fields = ['username', 'email', 'first_name', 'last_name', 'phone', 'image', 'password', 'confirm_password']
+        fields = ['username', 'email', 'first_name', 'last_name', 'phone', 'password', 'confirm_password']
 
     def validate(self, data):
         password = data.get('password')

@@ -40,7 +40,8 @@ DEBUG = True
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'localhost:5173']
 
 
-# Application definition
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 INSTALLED_APPS = [
     'jazzmin',

@@ -27,7 +27,6 @@ phone_regex = RegexValidator(
         
 class CustomUser(AbstractUser):
     email = models.EmailField(unique=True)
-    image = CloudinaryField('images', validators=[validate_image_size, validate_image_extension], default='ljpmwdkm1wz1sagqsk5f')
     phone = models.CharField(max_length=13, validators=[phone_regex], unique=True)
     confirm_password = models.CharField(max_length=255)
 

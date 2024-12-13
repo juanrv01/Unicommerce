@@ -70,8 +70,8 @@ class UserDetail(generics.RetrieveUpdateAPIView):
 
     def get_serializer_class(self):
         if self.request.method == 'PATCH':
-            return BasicUserSerializer  # Serializador para actualizar solo datos del usuario
-        return FullUserSerializer  # Serializador para devolver toda la información
+            return BasicUserSerializer 
+        return FullUserSerializer  
 
     def patch(self, request, *args, **kwargs):
         # Limitar la actualización solo a los datos del usuario
