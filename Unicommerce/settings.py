@@ -80,12 +80,9 @@ MIDDLEWARE = [
 ]
 CSRF_TRUSTED_ORIGINS = ['https://unicommerce-eta.vercel.app', 'https://unicommerce.onrender.com']
 
-CORS_ALLOW_ALL_ORIGINS = True
-
 
 ROOT_URLCONF = 'Unicommerce.urls'
 
-CORS_ORIGIN_ALLOW_ALL = True
 
 USE_X_FORWARDED_HOST = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -105,8 +102,6 @@ CORS_ALLOW_HEADERS=[
 
 CORS_ALLOW_CREDENTIALS = True
 
-CORS_ALLOWED_ORIGINS = ['*']
-CORS_ALLOWED_ORIGIN_REGEXES = ['*']
 CORS_ALLOW_METHODS = [
 'DELETE',
 'GET',
@@ -115,6 +110,8 @@ CORS_ALLOW_METHODS = [
 'POST',
 'PUT',
 ]
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 
 SITE_URL = 'https://unicommerce.onrender.com'
