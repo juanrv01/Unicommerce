@@ -42,7 +42,12 @@ SECRET_KEY = 'django-insecure-4(!ryx6%+j6$v4_f13+_%dc&k&-5+5(@ju73o00z4@@)n74#uy
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG', default=False)
 
-ALLOWED_HOSTS = ['* ']
+ALLOWED_HOSTS = ['unicommerce.onrender.com']
+
+CSRF_TRUSTED_ORIGINS = ['https://unicommerce.onrender.com'] 
+
+
+SECURE_SSL_REDIRECT = True
 
 
 # Application definition
@@ -78,14 +83,10 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-CSRF_TRUSTED_ORIGINS = ['https://unicommerce-eta.vercel.app', 'https://unicommerce.onrender.com']
 
 
 ROOT_URLCONF = 'Unicommerce.urls'
 
-
-USE_X_FORWARDED_HOST = True
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
 CORS_ALLOW_HEADERS=[
