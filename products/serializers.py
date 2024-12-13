@@ -1,9 +1,6 @@
 from rest_framework import serializers
-
 from users.models import CustomUser
 from django.contrib.auth.models import AnonymousUser
-
-
 from .models import Category,Product, Image
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -16,20 +13,21 @@ class ImageSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Image
-        fields = ['image', 'image_url']
+        fields = ['id','image', 'image_url']
 
     def get_image_url(self, obj):
         return obj.image.url
 
         
 class ProductSerializer(serializers.ModelSerializer):
-    category = CategorySerializer()
-    images = ImageSerializer(many=True)
+    category = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all())
+    images = ImageSerializer(many=True, read_only=True)
+    image = serializers.ImageField(required=True)
     is_in_cart = serializers.SerializerMethodField()
 
     class Meta:
         model = Product
-        fields = ['id', 'name', 'description', 'price', 'quantity', 'category', 'images', 'is_in_cart']
+        fields = ['id', 'name', 'description', 'price','image', 'quantity', 'category', 'images', 'is_in_cart']
 
     def get_is_in_cart(self, obj):
         user = self.context['request'].user

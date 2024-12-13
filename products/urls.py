@@ -1,7 +1,11 @@
 from django.urls import path, include
-from .views import  ProductListByCategory, ProductList
+from rest_framework.routers import DefaultRouter
+from .views import ProductViewSet
+
+# Creamos el router e incluimos el ViewSet de Product
+router = DefaultRouter()
+router.register(r'', ProductViewSet, basename='products')
 
 urlpatterns = [
-    path('category/<int:category_id>/', ProductListByCategory.as_view(), name='product-list-by-category'),
-    path('search/', ProductList.as_view(), name='product-list-search'),
+    path('', include(router.urls)),  # Incluir todas las rutas generadas automáticamente
 ]
