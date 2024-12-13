@@ -55,10 +55,11 @@ INSTALLED_APPS = [
     'products',
     'cart',
     'orders',
-
+    'docs',
     'rest_framework',
     'corsheaders',
-    'django_filters'
+    'django_filters',
+    'drf_spectacular',
 ]
 
 MIDDLEWARE = [
@@ -110,9 +111,6 @@ CORS_ALLOW_METHODS = [
 'PUT',
 ]
 
-REST_FRAMEWORK = {
-    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
-}
 
 SITE_URL = 'http://localhost:3000'
 ROOT_URLCONF = 'Unicommerce.urls'
@@ -191,9 +189,11 @@ cloudinary.config(
 )
 
 REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
+    ),
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
 
 SIMPLE_JWT = {
