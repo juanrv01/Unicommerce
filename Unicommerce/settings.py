@@ -17,7 +17,8 @@ import cloudinary.uploader
 import cloudinary.api
 from pathlib import Path
 from datetime import timedelta
-import os
+import os, environ
+import dj_database_url
 import stripe
 
 STRIPE_API_KEY = os.environ.get('sk_test_51N4C2MCnAe4mWFw2TKo8V3gkpZAfU7YE7oJF0MAJUZakxSOjm6jXC01q2knSLXfNI0moAvwoSF9Vhm9setmKAqJ400kB90PKWO')
@@ -26,6 +27,10 @@ stripe.api_key='sk_test_51N4C2MCnAe4mWFw2TKo8V3gkpZAfU7YE7oJF0MAJUZakxSOjm6jXC01
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# initialize environment variables
+env = environ.Env()
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 
 # Quick-start development settings - unsuitable for production
@@ -37,7 +42,7 @@ SECRET_KEY = 'django-insecure-4(!ryx6%+j6$v4_f13+_%dc&k&-5+5(@ju73o00z4@@)n74#uy
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'localhost:5173']
+ALLOWED_HOSTS = ['* ']
 
 
 # Application definition
@@ -64,6 +69,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -138,14 +144,18 @@ WSGI_APPLICATION = 'Unicommerce.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'unicommerce_db',
-        'USER': 'postgres',
-        'PASSWORD': 'password123',
-        'HOST': 'localhost',  # Si está en tu máquina local
-        'PORT': '5432',  # Puerto por defecto de PostgreSQL
-    }
+    #'default': {
+    #    'ENGINE': 'django.db.backends.postgresql',
+    #    'NAME': 'unicommerce_db',
+    #    'USER': 'postgres',
+    #    'PASSWORD': 'password123',
+    #    'HOST': 'localhost',  # Si está en tu máquina local
+    #    'PORT': '5432',  # Puerto por defecto de PostgreSQL
+    #}
+    'default': dj_database_url.config(
+        default=env('DATABASE_URL')
+    )
+
 }
 
 
@@ -178,6 +188,13 @@ USE_TZ = True
 
 
 STATIC_URL = 'static/'
+# This production code might break development mode, so we check whether we're in DEBUG mode
+if not DEBUG:
+    # Tell Django to copy static assets into a path called `staticfiles` (this is specific to Render)
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    # Enable the WhiteNoise storage backend, which compresses static files to reduce disk use
+    # and renames the files with unique names for each version to support long-term caching
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
