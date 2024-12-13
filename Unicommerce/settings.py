@@ -78,6 +78,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+CSRF_TRUSTED_ORIGINS = ['https://unicommerce-eta.vercel.app', 'https://unicommerce.onrender.com']
+
 
 ROOT_URLCONF = 'Unicommerce.urls'
 
@@ -188,6 +190,7 @@ USE_TZ = True
 
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # This production code might break development mode, so we check whether we're in DEBUG mode
 if not DEBUG:
     # Tell Django to copy static assets into a path called `staticfiles` (this is specific to Render)
@@ -212,6 +215,8 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(days=15),
